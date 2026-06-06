@@ -14,8 +14,10 @@
       --green: #08704f;
       --green-2: #24b47e;
       --blue: #2663d8;
+      --cyan: #0891b2;
       --amber: #f2aa1f;
       --red: #e84855;
+      --violet: #6d5dfc;
       --shadow: 0 14px 34px rgba(23, 32, 51, .09);
     }
 
@@ -25,7 +27,8 @@
       margin: 0;
       font-family: Inter, "Segoe UI", Arial, sans-serif;
       color: var(--ink);
-      background: var(--bg);
+      background:
+        linear-gradient(180deg, #eef5f8 0%, #f7fafc 42%, #edf3f8 100%);
     }
 
     .app {
@@ -35,9 +38,10 @@
     }
 
     .topbar {
-      background: linear-gradient(90deg, #075c45, #08704f);
+      background:
+        linear-gradient(135deg, #064c3c 0%, #08704f 52%, #0f766e 100%);
       color: #fff;
-      padding: 18px clamp(18px, 4vw, 44px);
+      padding: 20px clamp(18px, 4vw, 44px);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -61,6 +65,23 @@
     .subtitle {
       color: rgba(255, 255, 255, .78);
       font-size: 13px;
+    }
+
+    .headline-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .9);
+      font-size: 12px;
+      font-weight: 750;
     }
 
     .actions {
@@ -89,6 +110,14 @@
 
     button:hover, a.button:hover { background: rgba(255, 255, 255, .24); }
 
+    .ghost-button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .ghost-button:hover { background: #f5f8fc; }
+
     main {
       padding: 22px clamp(14px, 3vw, 34px) 34px;
       display: grid;
@@ -110,6 +139,125 @@
 
     .status strong { color: var(--ink); }
 
+    .ops-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .9fr 1.25fr;
+      gap: 14px;
+    }
+
+    .ops-card {
+      min-width: 0;
+      padding: 16px;
+      display: grid;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .ops-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .ops-title h2 { font-size: 14px; }
+
+    .ops-title span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .signal {
+      border: 1px solid #e6edf5;
+      border-radius: 8px;
+      padding: 11px;
+      background: #fbfdff;
+    }
+
+    .signal b {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .signal span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .signal.done b { color: var(--green); }
+    .signal.open b { color: var(--amber); }
+    .signal.risk b { color: var(--red); }
+
+    .workload {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .workload-item {
+      border-bottom: 1px solid #edf1f6;
+      padding-bottom: 10px;
+    }
+
+    .workload-item b {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .workload-item span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .priority-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .priority-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid #e6edf5;
+      border-radius: 8px;
+      padding: 10px 11px;
+      background: #fbfdff;
+    }
+
+    .priority-name {
+      min-width: 0;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .priority-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .priority-value {
+      text-align: right;
+      font-weight: 900;
+      color: var(--red);
+    }
+
     .kpis {
       display: grid;
       grid-template-columns: repeat(5, minmax(132px, 1fr));
@@ -129,6 +277,21 @@
       display: grid;
       align-content: space-between;
       gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: var(--accent, var(--green-2));
+    }
+
+    .card.ops-card {
+      align-content: start;
+      min-height: 0;
     }
 
     .label {
@@ -184,6 +347,7 @@
       color: #111c4e;
       font-size: 15px;
       letter-spacing: 0;
+      white-space: nowrap;
     }
 
     input, select {
@@ -196,11 +360,35 @@
       font: inherit;
     }
 
+    input[type="search"] { width: 220px; }
+    select { width: 130px; }
+
     .filters {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: flex-end;
+    }
+
+    .check-filter {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 0 10px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .check-filter input {
+      width: 15px;
+      height: 15px;
+      min-height: 0;
+      padding: 0;
     }
 
     table {
@@ -225,10 +413,12 @@
       vertical-align: middle;
     }
 
-    th:nth-child(1), td:nth-child(1) { width: 38%; }
+    th:nth-child(1), td:nth-child(1) { width: 34%; }
     th:nth-child(2), td:nth-child(2),
     th:nth-child(3), td:nth-child(3),
-    th:nth-child(4), td:nth-child(4) { text-align: right; }
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5) { text-align: right; }
+    th:nth-child(6), td:nth-child(6) { text-align: center; }
 
     .name {
       display: -webkit-box;
@@ -243,6 +433,33 @@
       grid-template-columns: minmax(78px, 1fr) 62px;
       gap: 8px;
       align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 86px;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .badge.done {
+      color: #067647;
+      background: #dcfae6;
+    }
+
+    .badge.open {
+      color: #b54708;
+      background: #fef0c7;
+    }
+
+    .badge.risk {
+      color: #b42318;
+      background: #fee4e2;
     }
 
     .best {
@@ -434,7 +651,7 @@
 
     @media (max-width: 1050px) {
       .kpis { grid-template-columns: repeat(2, minmax(150px, 1fr)); }
-      .grid, .charts { grid-template-columns: 1fr; }
+      .grid, .charts, .ops-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 680px) {
@@ -444,11 +661,14 @@
       .panel-head { align-items: flex-start; flex-direction: column; }
       .filters { width: 100%; justify-content: stretch; }
       input, select { width: 100%; }
+      .check-filter, .ghost-button { width: 100%; justify-content: center; }
       table { font-size: 12px; }
       th:nth-child(4), td:nth-child(4) { display: none; }
+      th:nth-child(5), td:nth-child(5) { display: none; }
       .donut-wrap { grid-template-columns: 1fr; justify-items: center; }
       .bar-chart { grid-template-columns: 36px 1fr; }
       .bars { gap: 8px; }
+      .signal-grid, .workload { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -458,6 +678,11 @@
       <div class="title">
         <h1>Dashboard de Progreso</h1>
         <div class="subtitle">Pedidos, pendientes, pallets y avance por planilla</div>
+        <div class="headline-meta">
+          <span class="pill" id="headerProgress">0% avance</span>
+          <span class="pill" id="headerOpen">0 planillas abiertas</span>
+          <span class="pill" id="headerUsers">0 usuarios activos</span>
+        </div>
       </div>
       <div class="actions">
         <button id="refresh" type="button" title="Actualizar datos">↻ Actualizar</button>
@@ -471,25 +696,60 @@
         <span id="updatedAt">Ultima actualizacion: --</span>
       </section>
 
+      <section class="ops-grid">
+        <article class="card ops-card">
+          <div class="ops-title">
+            <h2>Semaforo de avance</h2>
+            <span id="opsTotalSheets">0 planillas</span>
+          </div>
+          <div class="signal-grid">
+            <div class="signal done"><b id="signalDone">0</b><span>Completas</span></div>
+            <div class="signal open"><b id="signalOpen">0</b><span>En proceso</span></div>
+            <div class="signal risk"><b id="signalRisk">0</b><span>Criticas</span></div>
+          </div>
+        </article>
+
+        <article class="card ops-card">
+          <div class="ops-title">
+            <h2>Carga operativa</h2>
+            <span>Promedios</span>
+          </div>
+          <div class="workload">
+            <div class="workload-item"><b id="usersActive">0</b><span>Usuarios activos</span></div>
+            <div class="workload-item"><b id="ordersPerUser">0</b><span>Pedidos / usuario</span></div>
+            <div class="workload-item"><b id="pendingPerUser">0</b><span>Pendientes / usuario</span></div>
+            <div class="workload-item"><b id="palletCoverage">0</b><span>Pickeados / pallet</span></div>
+          </div>
+        </article>
+
+        <article class="card ops-card">
+          <div class="ops-title">
+            <h2>Prioridad de cierre</h2>
+            <span>Mayor pendiente</span>
+          </div>
+          <div class="priority-list" id="priorityList"></div>
+        </article>
+      </section>
+
       <section class="kpis">
-        <article class="card">
+        <article class="card" style="--accent: var(--blue)">
           <div class="label">Total pedidos</div>
           <div class="metric" id="kpiTotal">0</div>
         </article>
-        <article class="card">
+        <article class="card" style="--accent: var(--green-2)">
           <div class="label">Pickeados totales</div>
           <div class="metric" id="kpiPicked">0</div>
         </article>
-        <article class="card">
+        <article class="card" style="--accent: var(--green)">
           <div class="label">% progreso general</div>
           <div class="metric" id="kpiProgress">0%</div>
           <div class="progress-track"><div class="progress-fill" id="kpiProgressBar"></div></div>
         </article>
-        <article class="card">
+        <article class="card" style="--accent: var(--violet)">
           <div class="label">SKU totales</div>
           <div class="metric" id="kpiSku">0</div>
         </article>
-        <article class="card">
+        <article class="card" style="--accent: var(--amber)">
           <div class="label">Pallets</div>
           <div class="metric" id="kpiPallets">0</div>
         </article>
@@ -507,6 +767,8 @@
                 <option value="totalDesc">Pedidos</option>
                 <option value="nameAsc">Nombre</option>
               </select>
+              <label class="check-filter"><input id="onlyPending" type="checkbox"> Solo pendientes</label>
+              <button class="ghost-button" id="clearFilters" type="button">Limpiar filtros</button>
             </div>
           </div>
           <table>
@@ -516,6 +778,8 @@
                 <th>Pickeados</th>
                 <th>% Progreso</th>
                 <th>Pedidos</th>
+                <th>Pendientes</th>
+                <th>Estado</th>
               </tr>
             </thead>
             <tbody id="tableBody"></tbody>
@@ -662,15 +926,26 @@
       const pending = rows.reduce((sum, row) => sum + row.pending, 0);
       const sku = rows.reduce((sum, row) => sum + row.sku, 0);
       const pallets = rows.reduce((sum, row) => sum + row.pallets, 0);
+      const users = rows.reduce((sum, row) => sum + row.users, 0);
       const picked = Math.max(total - pending, 0);
       const progress = total ? picked / total : 0;
-      return { total, pending, picked, sku, pallets, progress };
+      return { total, pending, picked, sku, pallets, users, progress };
+    }
+
+    function rowStatus(row) {
+      if (row.pending <= 0 && row.total > 0) return { key: "done", label: "Completa" };
+      if (row.progress < .5 && row.pending > 0) return { key: "risk", label: "Critica" };
+      return { key: "open", label: "En proceso" };
     }
 
     function filteredRows() {
       const query = $("search").value.trim().toLowerCase();
       const sort = $("sort").value;
-      const rows = data.filter((row) => row.name.toLowerCase().includes(query));
+      const rows = data.filter((row) => {
+        const matchesSearch = row.name.toLowerCase().includes(query);
+        const matchesPending = !$("onlyPending").checked || row.pending > 0;
+        return matchesSearch && matchesPending;
+      });
       rows.sort((a, b) => {
         if (sort === "pendingDesc") return b.pending - a.pending;
         if (sort === "totalDesc") return b.total - a.total;
@@ -689,6 +964,44 @@
       $("kpiPallets").textContent = fmt.format(summary.pallets);
     }
 
+    function renderHeader(summary, rows) {
+      const open = rows.filter((row) => row.pending > 0).length;
+      $("headerProgress").textContent = `${pct(summary.progress)} avance`;
+      $("headerOpen").textContent = `${fmt.format(open)} planillas abiertas`;
+      $("headerUsers").textContent = `${fmt.format(summary.users)} usuarios activos`;
+    }
+
+    function renderOperations(summary, rows) {
+      const done = rows.filter((row) => rowStatus(row).key === "done").length;
+      const risk = rows.filter((row) => rowStatus(row).key === "risk").length;
+      const open = rows.filter((row) => row.pending > 0).length;
+      $("opsTotalSheets").textContent = `${fmt.format(rows.length)} planillas`;
+      $("signalDone").textContent = fmt.format(done);
+      $("signalOpen").textContent = fmt.format(open);
+      $("signalRisk").textContent = fmt.format(risk);
+      $("usersActive").textContent = fmt.format(summary.users);
+      $("ordersPerUser").textContent = fmt.format(Math.round(summary.total / Math.max(summary.users, 1)));
+      $("pendingPerUser").textContent = fmt.format(Math.round(summary.pending / Math.max(summary.users, 1)));
+      $("palletCoverage").textContent = fmt.format(Math.round(summary.picked / Math.max(summary.pallets, 1)));
+      renderPriority(rows);
+    }
+
+    function renderPriority(rows) {
+      const priorityRows = [...rows]
+        .filter((row) => row.pending > 0)
+        .sort((a, b) => b.pending - a.pending)
+        .slice(0, 3);
+      $("priorityList").innerHTML = priorityRows.length ? priorityRows.map((row, index) => `
+        <div class="priority-row">
+          <div>
+            <div class="priority-name" title="${escapeHtml(row.name)}">P${index + 1} · ${escapeHtml(row.name)}</div>
+            <div class="priority-meta">${pct(row.progress)} de avance · ${fmt.format(row.total)} pedidos</div>
+          </div>
+          <div class="priority-value">${fmt.format(row.pending)}</div>
+        </div>
+      `).join("") : `<div class="priority-row"><div><div class="priority-name">Sin pendientes</div><div class="priority-meta">Todas las planillas estan completas.</div></div><div class="priority-value">0</div></div>`;
+    }
+
     function renderTable(rows) {
       $("tableBody").innerHTML = rows.map((row) => `
         <tr>
@@ -701,6 +1014,8 @@
             </div>
           </td>
           <td>${fmt.format(row.total)}</td>
+          <td>${fmt.format(row.pending)}</td>
+          <td><span class="badge ${rowStatus(row).key}">${rowStatus(row).label}</span></td>
         </tr>
       `).join("");
     }
@@ -750,7 +1065,9 @@
     function render() {
       const visible = filteredRows();
       const summary = totals(data);
+      renderHeader(summary, data);
       renderKpis(summary);
+      renderOperations(summary, data);
       renderTable(visible);
       renderBest(data);
       renderBars(data);
@@ -776,6 +1093,13 @@
 
     $("search").addEventListener("input", render);
     $("sort").addEventListener("change", render);
+    $("onlyPending").addEventListener("change", render);
+    $("clearFilters").addEventListener("click", () => {
+      $("search").value = "";
+      $("sort").value = "progressDesc";
+      $("onlyPending").checked = false;
+      render();
+    });
     $("refresh").addEventListener("click", refresh);
     render();
     refresh();
