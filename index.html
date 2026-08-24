@@ -723,6 +723,29 @@
       .bars { gap: 8px; }
       .signal-grid, .workload { grid-template-columns: 1fr; }
     }
+
+    .intelligence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+
+.intelligence-badge svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
   </style>
 </head>
 <body>
@@ -733,6 +756,10 @@
         <div class="title">
           <h1>Dashboard de Progreso</h1>
           <div class="subtitle">Pedidos, pendientes, pallets y avance por planilla</div>
+          <div class="intelligence-badge">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+  Inteligencia operativa
+</div>
           <div class="headline-meta">
             <span class="pill" id="headerProgress">0% avance</span>
             <span class="pill" id="headerOpen">0 planillas abiertas</span>
@@ -741,7 +768,6 @@
         </div>
       </div>
       <div class="actions">
-        <button id="themeToggle" type="button" title="Cambiar tema" onclick="toggleTheme()">Modo dark</button>
         <button id="refresh" type="button" title="Actualizar datos">Actualizar</button>
         <a class="button" href="https://docs.google.com/spreadsheets/d/1IxZIzFhhkYybSUZbiglLtMnMMWL5zS9PQqLhM9-ZICU/edit?gid=0#gid=0" target="_blank" rel="noreferrer">Google Sheet</a>
       </div>
@@ -1119,27 +1145,6 @@
       }[char]));
     }
 
-    function applyTheme(theme) {
-      document.body.dataset.theme = theme;
-      $("themeToggle").textContent = theme === "dark" ? "Modo standard" : "Modo dark";
-      try {
-        localStorage.setItem("dashboardTheme", theme);
-      } catch (error) {}
-    }
-
-    function setupTheme() {
-      let savedTheme = "";
-      try {
-        savedTheme = localStorage.getItem("dashboardTheme");
-      } catch (error) {}
-      const preferredTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "standard";
-      applyTheme(savedTheme || preferredTheme);
-    }
-
-    window.toggleTheme = function toggleTheme() {
-      applyTheme(document.body.dataset.theme === "dark" ? "standard" : "dark");
-    };
-
     function render() {
       const visible = filteredRows();
       const summary = totals(data);
@@ -1179,7 +1184,6 @@
       render();
     });
     $("refresh").addEventListener("click", refresh);
-    setupTheme();
     render();
     refresh();
   </script>
